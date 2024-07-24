@@ -1,9 +1,39 @@
 import React from "react";
 import { Heading, Text, Box, Flex } from "@chakra-ui/react";
 // import Ripples from "react-ripples";
-import walletconnect from "./walletconnect";
+import { ethers } from "ethers";
+
+declare global {
+  interface Window {
+    ethereum: any;
+  }
+}
+import { useNavigate } from "react-router-dom";
 
 const HomePage: React.FC = () => {
+  const navigate = useNavigate();
+  const walletconnect = async () => {
+    if (window.ethereum) {
+      try {
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = provider.getSigner();
+        const address = (await signer).getAddress();
+        console.log("Connected account:", await address);
+        console.log(await window.ethereum);
+        navigate("/TransactionPage");
+        // return signer;
+        // Redirect or perform actions after successful login
+      } catch (error) {
+        console.error("Error connecting Metamask:", error);
+      }
+    } else {
+      console.error("Metamask not detected");
+      // Inform the user to install Metamask or use an Ethereum-compatible browser
+      alert(
+        "Metamask not detected. Please install Metamask or use an Ethereum-compatible browser."
+      );
+    }
+  };
   return (
     <Flex
       direction={"column"}

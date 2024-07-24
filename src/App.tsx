@@ -5,6 +5,8 @@ import NavBar from "./components/NavBar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./components/HomePage";
 import TransactionPage from "./components/TransactionPage";
+// import ProtectedRoute from "./components/middleware/ProtectedRoute";
+// import { AuthProvider } from "./components/middleware/AuthContext";
 
 const App: React.FC = () => {
   return (
@@ -19,7 +21,11 @@ const App: React.FC = () => {
         <NavBar />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/transactionPage" element={<TransactionPage />} />
+          {/* <Route
+              path="/TransactionPage"
+              element={<ProtectedRoute element={<TransactionPage />} />}
+            /> */}
+          <Route path="/TransactionPage" element={<TransactionPage />} />
         </Routes>
       </Router>
     </>

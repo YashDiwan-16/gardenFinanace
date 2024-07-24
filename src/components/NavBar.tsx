@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 // import Ripples from "react-ripples";
 import {
   Box,
@@ -17,12 +17,15 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
+import { ethers } from "ethers";
+
 import {
   ChevronDownIcon,
   ChevronRightIcon,
   CloseIcon,
   HamburgerIcon,
 } from "@chakra-ui/icons";
+import { useNavigate } from "react-router-dom";
 
 interface NavItem {
   label: string;
@@ -55,7 +58,10 @@ const NAV_ITEMS: Array<NavItem> = [
 
 const NavBar: React.FC = () => {
   const { isOpen, onToggle } = useDisclosure();
-
+  // const navigate = useNavigate();
+  useEffect(() => {
+    console.log(window.ethereum);
+  });
   return (
     <Box>
       <Flex
